@@ -19,7 +19,17 @@ $cmds = {
     
     '<'  => "stack_push(workspace, current_sum); current_sum = 0;",
     '>'  => "current_sum = 0; current_sum += stack_pop(workspace);",
-    '<>' => "current_stack = current_stack == &second_stack ? &first_stack : &second_stack;",
+    '<>' => "
+if(pointed_stack == AT_FIRST){
+    printf(\"switching to second\\n\");
+    current_stack = &second_stack;
+    pointed_stack = AT_SECOND;
+} else {
+    printf(\"switching to first\\n\");
+    current_stack = &first_stack;
+    pointed_stack = AT_FIRST;
+}
+"[1..-1],
 }
 
 def all_tokens
@@ -29,7 +39,7 @@ end
 def compile(str)
     reg = Regexp.new all_tokens.map { |e| Regexp.escape e }.join "|"
     toks = str.scan(reg)
-    toks.map { |e| $cmds[e] } .join "\n"
+    toks.map { |e| "// #{e}\n#{$cmds[e]}" } .join "\n"
 end
 
 file_name = ARGV[0]

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum { AT_FIRST, AT_SECOND } current_stack_pointer;
+
 typedef struct stack {
     size_t capacity;
     size_t size;
@@ -32,13 +34,15 @@ long stack_peek(stack* stk){
 
 long stack_pop(stack* stk){
     long res = stack_peek(stk);
-    stk->size--;
+    if(stk->size)
+        stk->size--;
     return res;
 }
 
 void stack_display(stack* stk){
     size_t i = stk->size;
+    if(i == 0) return;
     while(i --> 0){
-        printf("%ld\n", stk->data[i]);
+        printf("%ld ", stk->data[i]);
     }
 }
