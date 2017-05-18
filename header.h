@@ -4,7 +4,7 @@ stack* second_stack = malloc(sizeof(stack));
 stack** current_stack = &first_stack;
 current_stack_pointer pointed_stack = AT_FIRST;
 pointed_stack = pointed_stack;
-long current_sum;
+num_type current_sum;
 stack_init(workspace, 16);
 stack_init(second_stack, 16);
 stack_init(first_stack, 16);

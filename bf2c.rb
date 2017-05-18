@@ -21,11 +21,9 @@ $cmds = {
     '>'  => "current_sum = 0; current_sum += stack_pop(workspace);",
     '<>' => "
 if(pointed_stack == AT_FIRST){
-    printf(\"switching to second\\n\");
     current_stack = &second_stack;
     pointed_stack = AT_SECOND;
 } else {
-    printf(\"switching to first\\n\");
     current_stack = &first_stack;
     pointed_stack = AT_FIRST;
 }
